@@ -191,6 +191,9 @@ var Input = React.createClass({
           validData={this.state.isValidatorValid}
           valid={this.state.allValidatorValid}
           forbiddenWords={this.state.forbiddenWords}
+          minCharacters={this.props.minCharacters}
+          requireCapitals={this.props.requireCapitals}
+          requireNumbers={this.props.requireNumbers}
         />
     }
 

@@ -1,0 +1,57 @@
+.create_account_screen {
+  .display(absolute);
+  .topLeft(0, 0);
+  .bottomRight(0, 0);  
+  min-height: 520px;
+
+  @media @mobile {
+    position: relative;
+    min-height: 450px;
+  }
+
+  .create_account_form {
+    .topLeft(0, 0);
+    .bottomRight(0, 0); 
+    .flex-display();
+    .flex-direction(column);
+    .justify-content(center);
+    .align-items(center);
+    position: absolute;
+    min-height: 400px;
+
+    > h1 {
+      .display(relative);
+      font-size: 36px;
+      letter-spacing: .7px;
+      margin: 0;
+    }
+
+    p {
+      .display(relative);
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: .5px;
+      color: @dark-blue;
+      text-align: center;
+      opacity: .4;
+      margin: 0 0 30px 0;
+    }
+
+    .checkbox_group {
+      .display(relative);
+      min-height: 40px;
+
+      span {
+        letter-spacing: .5px;
+      }
+    }
+  }
+
+  form {
+    width: 430px;
+
+    @media @mobile {
+      width: 300px;
+    }
+  }
+}
