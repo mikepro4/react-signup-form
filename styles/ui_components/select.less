@@ -1,0 +1,395 @@
+@select-text-color:                #333;
+@select-input-border-color:        #ccc;
+@select-input-border-radius:       4px;
+@select-input-placeholder:         #aaa;
+@select-input-border-focus:        #08c; // blue
+
+@select-padding-vertical:          8px;
+@select-padding-horizontal:        10px;
+
+@select-arrow-color:               #999;
+@select-arrow-width:               8px;
+
+@select-menu-zindex:               1000;
+
+@select-option-color:              lighten(@select-text-color, 20%);
+@select-option-focused-color:      @select-text-color;
+@select-option-focused-bg:         #f2f9fc; // pale blue
+
+@select-noresults-color:           lighten(@select-text-color, 40%);
+
+@select-clear-color:               #999;
+@select-clear-hover-color:         #c0392b; // red
+
+@select-item-border-radius:        2px;
+@select-item-gutter:               2px;
+@select-item-padding-vertical:     3px;
+@select-item-padding-horizontal:   5px;
+@select-item-font-size:            1em;
+@select-item-color:                #08c; // pale blue
+@select-item-bg:                   #f2f9fc;
+@select-item-border-color:         darken(@select-item-bg, 10%);
+@select-item-hover-color:          darken(@select-item-color, 5%); // pale blue
+@select-item-hover-bg:             darken(@select-item-bg, 5%);
+
+// Utilities
+
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+.square(@size) {
+  .size(@size; @size);
+}
+.border-top-radius(@radius) {
+  border-top-right-radius: @radius;
+   border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  border-bottom-right-radius: @radius;
+     border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+  border-bottom-right-radius: @radius;
+   border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  border-bottom-left-radius: @radius;
+     border-top-left-radius: @radius;
+}
+
+
+// Vendor Prefixes
+
+.animation(@animation) {
+  -webkit-animation: @animation;
+       -o-animation: @animation;
+          animation: @animation;
+}
+.transform(@transform) {
+  -webkit-transform: @transform;
+     -moz-transform: @transform;
+      -ms-transform: @transform;
+          transform: @transform;
+}
+.rotate(@degrees) {
+  -webkit-transform: rotate(@degrees);
+      -ms-transform: rotate(@degrees); // IE9 only
+       -o-transform: rotate(@degrees);
+          transform: rotate(@degrees);
+}
+
+
+// wrapper
+
+.Select {
+  position: relative;
+
+  // 
+  // Control
+  // ------------------------------
+  @input-height: 70px;
+  @input-height-mobile: 64px;
+
+  // base
+
+  .Select-control {
+    .display(relative);
+    .box-shadow(none);
+    .size(100%, @input-height);
+    .box-sizing(border-box);
+    .transition(all 0.7s ease-in-out);
+    background: white;
+    z-index: @layer1;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    margin: 0 auto 13px auto;
+    color: @dark-blue;
+    letter-spacing: .5px;
+    font-weight: 300;
+    font-size: 18px;
+
+    @media @mobile {
+      height: @input-height-mobile;
+    }
+  }
+
+  &.is-searchable {
+    &.is-open > .Select-control {
+      cursor: text;
+    }
+  }
+
+  &.is-open > .Select-control {
+    .border-bottom-radius( 0 );
+    background: white;
+    border-color: darken(@select-input-border-color, 10%) @select-input-border-color lighten(@select-input-border-color, 5%);
+
+    // flip the arrow so its pointing up when the menu is open
+    > .Select-arrow {
+      border-color: transparent transparent @select-arrow-color;
+      border-width: 0 @select-arrow-width @select-arrow-width;
+    }
+  }
+
+  &.is-searchable {
+    &.is-focused:not(.is-open) > .Select-control {
+      cursor: text;
+    }
+  }
+
+
+  // placeholder
+
+  .Select-placeholder {
+    .display(absolute);
+    .topLeft(20px, 0);
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: .7px;
+    position: absolute;
+    z-index: @layer2;
+    cursor: text;
+    padding: 0 0 0 15px;
+    color: #c1c5cc;
+
+    @media @mobile {
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    // crop text
+    z-index: @layer2;
+  }
+
+
+  .Select-actual-placeholder {
+    position: absolute;
+    display: none;
+    color: #b8bdc4;
+    letter-spacing: .3px;
+    font-size: 11px;
+    .topLeft(14px, 15px);
+    z-index: @layer2;
+    font-weight: 100;
+
+    @media @mobile {
+      font-weight: 300;
+    }
+  }
+
+  &.is-focused {
+    .Select-placeholder {
+      opacity: 0;
+    }
+  }
+  
+  &.has-value, &.is-focused.has-value  {
+    .Select-actual-placeholder {
+      display: block;
+    }
+
+    .Select-placeholder {
+      color: @select-text-color;
+      opacity: 1;
+      top: 30px;
+      color: @dark-blue;
+      letter-spacing: .5px;
+      font-weight: 100;
+      font-size: 16px;
+
+      @media @mobile {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.is-focused {
+    .Select-placeholder {
+      opacity: 0;
+    }
+    .Select-actual-placeholder {
+      display: block;
+    }
+  }
+
+  &.is-open,  {
+    .Select-actual-placeholder {
+      display: block;
+    }
+    .Select-placeholder {
+      display: none
+    }
+  }
+
+  &.is-open.has-value, &.is-open.has-value.is-focused {
+    .Select-placeholder {
+      display: block
+    }
+  }
+  
+  // the <input> element users type in
+
+  .Select-input {
+    
+    > input {
+      .display(relative);
+      .box-shadow(none);
+      .size(410px, @input-height);
+      .border-radius(3px);
+      .transition(all 0.7s ease-in-out);
+      .box-sizing(border-box);
+      z-index: @layer1;
+      -webkit-appearance: none;
+      border: none;
+      outline: none;
+      padding: 16px 15px 0 15px;
+      margin: 0 auto 13px auto;
+      color: @dark-blue;
+      letter-spacing: .5px;
+      font-weight: 100;
+      font-size: 16px;
+
+      @media @mobile {
+        height: @input-height-mobile;
+        font-size: 14px;
+      }
+
+      .is-focused & {
+        cursor: text;
+      }
+    }
+  }
+
+  // fake input
+  .Select-control:not(.is-searchable) > .Select-input {
+    outline: none;
+  }
+
+
+  // loading indicator
+
+  .Select-loading {
+    .Select-spinner(16px, @select-input-border-color, @select-text-color);
+    margin-top: -8px;
+    position: absolute;
+    right: (@select-padding-horizontal * 3);
+    top: 50%;
+  }
+
+  .has-value > .Select-control > .Select-loading {
+    right: (@select-padding-horizontal * 3) + 16px;
+  }
+
+
+  // the little cross that clears the field
+
+  .Select-clear {
+    opacity: 0;
+  }
+
+  // arrow indicator
+
+  .Select-arrow {
+    border-color: @select-arrow-color transparent transparent;
+    border-style: solid;
+    border-width: @select-arrow-width @select-arrow-width 0;
+    content: " ";
+    display: block;
+    height: 0;
+    margin-top: -ceil(@select-arrow-width / 2);
+    position: absolute;
+    right: 15px;
+    top: 32px;
+    width: 0;
+    opacity: .8;
+
+    @media @mobile {
+      top: 30px;
+    }
+  }
+
+  // 
+  // Select Menu
+  // ------------------------------
+
+
+  // wrapper
+
+  .Select-menu {
+    .border-bottom-radius( @select-input-border-radius );
+    background-color: white;
+    margin-top: 0px;
+    margin-left: -2px;
+    border: 2px solid @gray;
+    max-height: 210px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: @select-menu-zindex;
+    -webkit-overflow-scrolling: touch;
+    .webkit-scrollbar-light();
+
+
+    @media @mobile {
+      top: 64px;
+    }
+
+  }
+
+  // options
+
+  .Select-option {
+    box-sizing: border-box;
+    color: @select-option-color;
+    cursor: pointer;
+    display: block;
+    padding: @select-padding-vertical 15px;
+    font-weight: 100;
+    letter-spacing: .4px;
+
+    &:last-child {
+      .border-bottom-radius( @select-input-border-radius );
+    }
+    
+    &.is-focused {
+      background-color: #82d2f0;
+      color: #fff;
+    }
+  }
+
+  // no results
+
+  .Select-noresults {
+    box-sizing: border-box;
+    color: @select-noresults-color;
+    cursor: default;
+    display: block;
+    padding: @select-padding-vertical @select-padding-horizontal;
+  }
+
+  // 
+  // Spinner
+  // ------------------------------
+
+  .Select-spinner(@size, @orbit, @satellite) {
+    .animation( spin 400ms infinite linear );
+    .square(@size);
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: floor(@size / 8) solid @orbit;
+    border-right-color: @satellite;
+    display: inline-block;
+    position: relative;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(1turn); }
+}
+

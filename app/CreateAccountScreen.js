@@ -2,6 +2,8 @@
 var React = require('react/addons');
 var Input = require('./components/Input.js');
 var _ = require('underscore');
+var Select = require('./components/Select');
+var STATES = require('./components/data/states');
 
 var CreateAccountScreen = React.createClass({
   getInitialState: function () {
@@ -89,6 +91,17 @@ var CreateAccountScreen = React.createClass({
               emptyMessage="Please confirm your password"
               errorMessage="Passwords don't match"
             /> 
+
+            <Select 
+              options={STATES} 
+              value={this.state.selectValue} 
+              onChange={this.updateValue} 
+              searchable={this.props.searchable} 
+              emptyMessage="Please select state"
+              errorMessage="Please select state"
+              placeholder="Choose Your State"
+              placeholderTitle="Your State"
+            />
 
             <button 
               type="submit" 
