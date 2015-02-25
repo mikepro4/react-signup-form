@@ -1,0 +1,29 @@
+//
+// Application Scaffolding
+// --------------------------------------------------
+
+// vars
+@vertical_breakpoint: 820px;
+
+html {
+  .size(100%, 100%);
+  overflow: hidden;
+}
+
+body {
+  .display(absolute);
+  .size(100%, 100%);
+  -webkit-font-smoothing: subpixel-antialiased;
+  background: @body-bg;
+  overflow: hidden;
+  font: normal normal normal @font-size-base/@line-height-base 'Helvetica';
+  -webkit-overflow-scrolling: touch;
+  display: block;
+}
+
+.application_wrapper {
+  .display(absolute);
+  .size(100%, 100%);
+  .topLeft(0, 0);
+  z-index: @layer1;
+}

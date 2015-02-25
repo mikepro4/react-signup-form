@@ -1,0 +1,66 @@
+// Selection
+// -------------------------
+
+::selection {
+  background: @light-blue;
+  color: #fff;
+}
+
+::-moz-selection {
+  background: @light-blue;
+  color: #fff;
+}
+
+// Links
+// -------------------------
+
+* {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  .transition(color 0.3s ease-in-out);
+  .user-select(none);
+
+  &:hover {
+    color: @link-hover-color;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: @link-active-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+}
+
+// Body text
+// -------------------------
+
+p {
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  margin: 0 0 (@line-height-computed / 2);
+}
+
+// Table
+// -------------------------
+
+table {
+  width: 100%;
+
+  thead, tr, th, td {
+    vertical-align: middle;
+  }
+
+  td {
+    padding-right: 20px;
+  }
+}
