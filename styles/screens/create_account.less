@@ -4,10 +4,6 @@
   .bottomRight(0, 0);  
   min-height: 520px;
 
-  @media @mobile {
-    position: relative;
-    min-height: 450px;
-  }
 
   .create_account_form {
     .topLeft(0, 0);
@@ -18,11 +14,14 @@
     .align-items(center);
     position: absolute;
     min-height: 400px;
+    overflow-y: scroll;
+    padding-bottom: 150px;
 
     > h1 {
       .display(relative);
       font-size: 36px;
       letter-spacing: .7px;
+      font-weight: 200;
       margin: 0;
     }
 

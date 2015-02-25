@@ -8,10 +8,12 @@ var STATES = require('./components/data/states');
 var CreateAccountScreen = React.createClass({
   getInitialState: function () {
     return {
+      email: null,
       companyName: null,
-      forbiddenWords: ["password", "user", "username"],
-      passsword: null,
-      confirmPassword: null
+      password: null,
+      confirmPassword: null,
+      statesValue: null,
+      forbiddenWords: ["password", "user", "username"]
     }
   },
 
@@ -33,20 +35,53 @@ var CreateAccountScreen = React.createClass({
 
   saveAndContinue: function (e) {
     e.preventDefault();
+
+    var canProceed = !_.isEmpty(this.state.email) && this.validateEmail(this.state.email) && !_.isEmpty(this.state.statesValue);
+
+    if(canProceed) {
+      var data = {
+        email: this.state.email,
+        state: this.state.statesValue
+      }
+    } else {
+      this.refs.email.isValid();
+      this.refs.state.isValid();
+      this.refs.companyName.isValid();
+      this.refs.password.isValid();
+      this.refs.passwordConfirm.isValid();
+    }
   },
 
   isConfirmedPassword: function (event) {
     return (event == this.state.password)
   },
 
-  handleCompanyInput: function(value) {
+  handleCompanyInput: function(event) {
     this.setState({
-      companyName: value
+      companyName: event.target.value
     })
+  },
+
+  handleEmailInput: function(event){
+    this.setState({
+      email: event.target.value
+    });
+  },
+
+  validateEmail: function (event) {
+    // regex from http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(event);
   },
 
   isEmpty: function (value) {
     return !_.isEmpty(value);
+  },
+
+  updateStatesValue: function (value) {
+    this.setState({
+      statesValue: value
+    })
   },
 
   render: function() {
@@ -54,9 +89,22 @@ var CreateAccountScreen = React.createClass({
       <div className="create_account_screen">
 
         <div className="create_account_form">
-          <h1>React form</h1>
-          <p>Demo of inputs interaction and various validations.</p>
+          <h1>Create account</h1>
+          <p>Create your account</p>
           <form onSubmit={this.saveAndContinue}>
+
+            <Input 
+              text="Email Address" 
+              ref="email"
+              type="text"
+              defaultValue={this.state.email} 
+              validate={this.validateEmail}
+              value={this.state.email}
+              onChange={this.handleEmailInput} 
+              errorMessage="Email is invalid"
+              emptyMessage="Email can't be empty"
+              errorVisible={this.state.showEmailError}
+            />
 
             <Input 
               text="Company Name" 
@@ -94,8 +142,9 @@ var CreateAccountScreen = React.createClass({
 
             <Select 
               options={STATES} 
-              value={this.state.selectValue} 
-              onChange={this.updateValue} 
+              ref="state"
+              value={this.state.statesValue} 
+              onChange={this.updateStatesValue} 
               searchable={this.props.searchable} 
               emptyMessage="Please select state"
               errorMessage="Please select state"

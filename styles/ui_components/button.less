@@ -1,12 +1,38 @@
-button.button_wide {
-  .display(relative);
-  width: 100%;
-  margin: 20px 0 0 0;
-  height: 50px;
-  font-size: 13px;
-  letter-spacing: 1.1px;
+.button {
+  .transition(all 0.2s ease-in-out);
+  .user-select(none);
+  display: inline-block;
+  position: relative;
+  border: none;
+  border-radius: 3px;
+  background: @button-default-bg;
+  color: @button-default-color;
+  font: normal normal 200 13px/40px 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  height: 40px;
+  padding: 0px 15px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  cursor: pointer;
+  white-space: nowrap;
 
-  @media @mobile {
-    margin: 0;
+  &.button_wide {
+    .display(relative);
+    width: 100%;
+    margin: 20px 0 0 0;
+    height: 50px;
+    font-size: 13px;
+  }
+
+  &:hover,
+  &:focus {
+    color: @button-default-color;
+    background: @light-blue;
+  }
+
+  &:active,
+  &.active {
+    .box-shadow(none);
+    background: lighten(@light-blue, 10%);
   }
 }
