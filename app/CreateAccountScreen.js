@@ -36,7 +36,10 @@ var CreateAccountScreen = React.createClass({
   saveAndContinue: function (e) {
     e.preventDefault();
 
-    var canProceed = !_.isEmpty(this.state.email) && this.validateEmail(this.state.email) && !_.isEmpty(this.state.statesValue);
+    var canProceed = this.validateEmail(this.state.email) 
+        && !_.isEmpty(this.state.statesValue)
+        && this.refs.password.isValid()
+        && this.refs.passwordConfirm.isValid();
 
     if(canProceed) {
       var data = {

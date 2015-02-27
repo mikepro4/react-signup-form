@@ -6,7 +6,10 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="application_wrapper">
-        <CreateAccountScreen/>
+
+        <div className="application_routeHandler">
+            <CreateAccountScreen/>
+        </div>
       </div>
     );
   }

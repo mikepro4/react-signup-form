@@ -97,6 +97,7 @@ var Input = React.createClass({
         errorVisible: true
       });
     }
+    return this.state.valid;
   },
 
   handleFocus: function () {
