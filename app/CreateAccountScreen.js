@@ -4,6 +4,7 @@ var Input = require('./components/Input.js');
 var _ = require('underscore');
 var Select = require('./components/Select');
 var STATES = require('./components/data/states');
+var Icon = require('./components/Icon.js');
 
 var CreateAccountScreen = React.createClass({
   getInitialState: function () {
@@ -46,6 +47,7 @@ var CreateAccountScreen = React.createClass({
         email: this.state.email,
         state: this.state.statesValue
       }
+      alert('Thanks.');
     } else {
       this.refs.email.isValid();
       this.refs.state.isValid();
@@ -93,7 +95,7 @@ var CreateAccountScreen = React.createClass({
 
         <div className="create_account_form">
           <h1>Create account</h1>
-          <p>Create your account</p>
+          <p>Example of form validation built with React.</p>
           <form onSubmit={this.saveAndContinue}>
 
             <Input 
@@ -162,6 +164,10 @@ var CreateAccountScreen = React.createClass({
             </button>
 
           </form>
+
+           <a href="https://github.com/mikepro4/react-signup-form" className="github_link" title="View Source Code"> 
+              <Icon type="guthub" />
+          </a>
         </div>
 
       </div>

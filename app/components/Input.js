@@ -91,12 +91,15 @@ var Input = React.createClass({
   },
 
   isValid: function () {
-    if(_.isEmpty(this.state.value) || !this.props.validate(this.state.value)) {
-      this.setState({
-        valid: false,
-        errorVisible: true
-      });
+    if(this.props.validate) {
+      if(_.isEmpty(this.state.value) || !this.props.validate(this.state.value)) {
+        this.setState({
+          valid: false,
+          errorVisible: true
+        });
+      }
     }
+   
     return this.state.valid;
   },
 
