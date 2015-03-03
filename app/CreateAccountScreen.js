@@ -165,7 +165,7 @@ var CreateAccountScreen = React.createClass({
 
           </form>
 
-           <a href="https://github.com/mikepro4/react-signup-form" className="github_link" title="View Source Code"> 
+           <a href="https://github.com/mikepro4/react-signup-form" target="_blank" className="github_link" title="View Source Code"> 
               <Icon type="guthub" />
           </a>
         </div>
