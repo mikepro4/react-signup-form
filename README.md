@@ -1,5 +1,7 @@
 # react-signup-form
 
+Demo http://codepen.io/mikepro4/full/pvKYZG/
+
 1. ```npm install```
 2. ```npm start``` – will create ```/build``` directory
 3. Go to ```/build``` directory and type ```python -m SimpleHTTPServer```
