@@ -161,7 +161,7 @@ var Input = React.createClass({
   },
 
   countNumbers: function(value) {
-    return myValue = /\d+/.exec(value)
+    return /\d/.test(value);
   },
 
   checkWords: function(value) {
